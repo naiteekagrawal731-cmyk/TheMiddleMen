@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:5400/MMDb
+    username: root
+    password: ${DB_PASSWORD:password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:default_id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:default_secret}
+            scope:
+              - https://www.googleapis.com/auth/yt-analytics.readonly
+              - https://www.googleapis.com/auth/youtube.readonly
+              - openid
+              - profile
+              - email
+
+jwt:
+  secret: ${JWT_SECRET:secret}

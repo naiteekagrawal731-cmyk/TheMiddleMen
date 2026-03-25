@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- Login Section -->
+    <div id="login-section">
+        <h2>Login</h2>
+
+        <input type="text" id="login-username" placeholder="Username" />
+        <input type="password" id="login-password" placeholder="Password" />
+
+        <button id="login-btn">Login</button>
+        <button id="oauth-btn">Login with Google</button>
+
+        <p>Don’t have an account?
+            <button id="go-register-btn">Register</button>
+        </p>
+
+    </div>
+
+    <!-- Register Section -->
+    <div id="register-section" style="display:none;">
+
+        <h2>Register</h2>
+
+        <input type="text" id="register-username" placeholder="Username" />
+        <input type="password" id="register-password" placeholder="Password" />
+
+        <button id="register-btn">Create Account</button>
+
+        <p>Already have an account?
+            <button id="go-login-btn">Back to Login</button>
+        </p>
+
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard-section" style="display:none;">
+
+        <div id="dashboard-header">
+            <h2>Social Dashboard</h2>
+
+            <div>
+                <button id="go-change-password-btn">Change Password</button>
+                <button id="logout-btn">Logout</button>
+            </div>
+
+        </div>
+
+        <div id="widgets"></div>
+
+        <div id="video-section">
+            <h3 class="section-title">Latest Videos</h3>
+            <div id="videos-container"></div>
+        </div>
+
+    </div>
+
+    <!-- Change Password Page -->
+    <div id="change-password-section" style="display:none;">
+
+        <h2>Change Password</h2>
+
+        <input
+                type="password"
+                id="new-password"
+                placeholder="Enter new password"
+        />
+
+        <button id="change-password-btn">
+            Update Password
+        </button>
+
+        <p>
+            <button id="back-dashboard-btn">
+                Back to Dashboard
+            </button>
+        </p>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
