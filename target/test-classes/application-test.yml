@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:default_id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:default_secret}
+            scope:
+              - https://www.googleapis.com/auth/yt-analytics.readonly
+              - https://www.googleapis.com/auth/youtube.readonly
+              - openid
+              - profile
+              - email
+
+jwt:
+  secret: ${JWT_SECRET:secret}
