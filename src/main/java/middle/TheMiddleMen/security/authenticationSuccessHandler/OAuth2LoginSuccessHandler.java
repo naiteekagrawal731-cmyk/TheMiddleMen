@@ -65,10 +65,16 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         Cookie refreshTokenCookie = new Cookie("refresh_token",token);
         refreshTokenCookie.setPath("/");
         refreshTokenCookie.setMaxAge(3600);
-        refreshTokenCookie.isHttpOnly();
+        refreshTokenCookie.setHttpOnly(true);
 
         response.addCookie(refreshTokenCookie);
-        response.sendRedirect(frontendRedirect);
-
+        
+        // Instead of a 302 redirect (which triggers IntelliJ's CSRF 404),
+        // we return an HTML page that redirects via JS with no-referrer.
+        response.setContentType("text/html");
+        response.getWriter().write(
+            "<html><head><meta name=\"referrer\" content=\"no-referrer\"></head>" +
+            "<body><script>window.location.href='" + frontendRedirect + "';</script></body></html>"
+        );
     }
 }

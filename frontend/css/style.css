@@ -1,0 +1,392 @@
+/* ==========================================================================
+   Base Styles & Variables
+   ========================================================================== */
+   @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+   :root {
+       --bg-color: #050505;
+       --bg-gradient: radial-gradient(circle at top left, #1e1b4b, #050505 60%);
+       --text-primary: #ffffff;
+       --text-secondary: #94a3b8;
+       
+       --accent-primary: #6366f1;
+       --accent-secondary: #8b5cf6;
+       --accent-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+       
+       --glass-bg: rgba(255, 255, 255, 0.03);
+       --glass-border: rgba(255, 255, 255, 0.08);
+       --glass-hover: rgba(255, 255, 255, 0.08);
+       
+       --danger: #ef4444;
+       --success: #10b981;
+       
+       --border-radius-sm: 8px;
+       --border-radius-md: 16px;
+       --border-radius-lg: 24px;
+       
+       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+   }
+   
+   * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+       font-family: 'Outfit', sans-serif;
+   }
+   
+   body {
+       background-color: var(--bg-color);
+       background-image: var(--bg-gradient);
+       color: var(--text-primary);
+       min-height: 100vh;
+       overflow-x: hidden;
+       display: flex;
+       flex-direction: column;
+   }
+   
+   /* Custom Scrollbar */
+   ::-webkit-scrollbar {
+       width: 8px;
+   }
+   ::-webkit-scrollbar-track {
+       background: transparent;
+   }
+   ::-webkit-scrollbar-thumb {
+       background: rgba(255,255,255,0.1);
+       border-radius: 4px;
+   }
+   ::-webkit-scrollbar-thumb:hover {
+       background: rgba(255,255,255,0.2);
+   }
+   
+   /* ==========================================================================
+      Utility Classes
+      ========================================================================== */
+   .container {
+       width: 100%;
+       max-width: 1200px;
+       margin: 0 auto;
+       padding: 2rem;
+   }
+   
+   .flex-center {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+   }
+   
+   .text-gradient {
+       background: var(--accent-gradient);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       background-clip: text;
+   }
+   
+   /* ==========================================================================
+      Glassmorphism Cards
+      ========================================================================== */
+   .glass-card {
+       background: var(--glass-bg);
+       backdrop-filter: blur(16px);
+       -webkit-backdrop-filter: blur(16px);
+       border: 1px solid var(--glass-border);
+       border-radius: var(--border-radius-md);
+       padding: 2rem;
+       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+       transition: var(--transition);
+   }
+   
+   .glass-card:hover {
+       background: var(--glass-hover);
+       border-color: rgba(255, 255, 255, 0.15);
+       transform: translateY(-2px);
+   }
+   
+   /* ==========================================================================
+      Typography
+      ========================================================================== */
+   h1, h2, h3, h4 {
+       font-weight: 600;
+       line-height: 1.2;
+       margin-bottom: 1rem;
+   }
+   
+   p {
+       color: var(--text-secondary);
+       line-height: 1.6;
+       font-size: 0.95rem;
+   }
+   
+   /* ==========================================================================
+      Forms & Inputs
+      ========================================================================== */
+   .form-group {
+       margin-bottom: 1.5rem;
+       position: relative;
+   }
+   
+   .form-group label {
+       display: block;
+       margin-bottom: 0.5rem;
+       font-size: 0.9rem;
+       color: var(--text-secondary);
+       font-weight: 500;
+   }
+   
+   .input-field {
+       width: 100%;
+       background: rgba(0, 0, 0, 0.2);
+       border: 1px solid var(--glass-border);
+       color: var(--text-primary);
+       padding: 0.8rem 1rem;
+       border-radius: var(--border-radius-sm);
+       font-size: 1rem;
+       transition: var(--transition);
+       outline: none;
+   }
+   
+   .input-field:focus {
+       border-color: var(--accent-primary);
+       box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+       background: rgba(0, 0, 0, 0.4);
+   }
+   
+   /* ==========================================================================
+      Buttons
+      ========================================================================== */
+   .btn {
+       display: inline-flex;
+       align-items: center;
+       justify-content: center;
+       padding: 0.8rem 1.5rem;
+       border-radius: var(--border-radius-sm);
+       font-weight: 600;
+       font-size: 1rem;
+       cursor: pointer;
+       transition: var(--transition);
+       border: none;
+       outline: none;
+       gap: 0.5rem;
+       width: 100%;
+   }
+   
+   .btn-primary {
+       background: var(--accent-gradient);
+       color: white;
+       box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+   }
+   
+   .btn-primary:hover {
+       transform: translateY(-2px);
+       box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+       filter: brightness(1.1);
+   }
+   
+   .btn-primary:active {
+       transform: translateY(0);
+   }
+   
+   .btn-secondary {
+       background: rgba(255,255,255,0.05);
+       color: var(--text-primary);
+       border: 1px solid var(--glass-border);
+   }
+   
+   .btn-secondary:hover {
+       background: rgba(255,255,255,0.1);
+   }
+   
+   /* ==========================================================================
+      Alerts / Toast Messages
+      ========================================================================== */
+   .alert {
+       padding: 1rem;
+       border-radius: var(--border-radius-sm);
+       margin-bottom: 1.5rem;
+       font-size: 0.9rem;
+       display: none;
+       animation: fadeIn 0.3s ease-out;
+   }
+   
+   .alert-error {
+       background: rgba(239, 68, 68, 0.1);
+       border: 1px solid rgba(239, 68, 68, 0.3);
+       color: #fca5a5;
+   }
+   
+   .alert-success {
+       background: rgba(16, 185, 129, 0.1);
+       border: 1px solid rgba(16, 185, 129, 0.3);
+       color: #6ee7b7;
+   }
+   
+   /* ==========================================================================
+      Auth Layouts
+      ========================================================================== */
+   .auth-wrapper {
+       min-height: 100vh;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       padding: 2rem;
+       position: relative;
+   }
+   
+   /* Background decorative elements */
+   .bg-blob {
+       position: absolute;
+       border-radius: 50%;
+       filter: blur(80px);
+       z-index: -1;
+       opacity: 0.5;
+   }
+   .bg-blob-1 {
+       width: 400px;
+       height: 400px;
+       background: var(--accent-primary);
+       top: -10%;
+       left: -10%;
+       animation: float 10s ease-in-out infinite alternate;
+   }
+   .bg-blob-2 {
+       width: 300px;
+       height: 300px;
+       background: var(--accent-secondary);
+       bottom: -10%;
+       right: -10%;
+       animation: float 12s ease-in-out infinite alternate-reverse;
+   }
+   
+   .auth-card {
+       width: 100%;
+       max-width: 420px;
+   }
+   
+   .auth-header {
+       text-align: center;
+       margin-bottom: 2rem;
+   }
+   
+   .auth-header h1 {
+       font-size: 2rem;
+       margin-bottom: 0.5rem;
+   }
+   
+   .auth-footer {
+       text-align: center;
+       margin-top: 1.5rem;
+       font-size: 0.9rem;
+       color: var(--text-secondary);
+   }
+   
+   .auth-footer a {
+       color: var(--accent-primary);
+       text-decoration: none;
+       font-weight: 500;
+       transition: var(--transition);
+   }
+   
+   .auth-footer a:hover {
+       color: var(--accent-secondary);
+       text-decoration: underline;
+   }
+   
+   /* ==========================================================================
+      Dashboard Layout
+      ========================================================================== */
+   .dashboard-nav {
+       padding: 1.5rem 0;
+       border-bottom: 1px solid var(--glass-border);
+       background: rgba(5, 5, 5, 0.8);
+       backdrop-filter: blur(12px);
+       position: sticky;
+       top: 0;
+       z-index: 100;
+   }
+   
+   .nav-content {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+   }
+   
+   .brand {
+       font-size: 1.5rem;
+       font-weight: 700;
+       display: flex;
+       align-items: center;
+       gap: 0.5rem;
+   }
+   
+   .dashboard-grid {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+       gap: 2rem;
+       margin-top: 2rem;
+   }
+   
+   .card-header {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       margin-bottom: 1.5rem;
+       padding-bottom: 1rem;
+       border-bottom: 1px solid var(--glass-border);
+   }
+   
+   /* Data displays */
+   .data-row {
+       display: flex;
+       justify-content: space-between;
+       padding: 0.8rem 0;
+       border-bottom: 1px dashed rgba(255,255,255,0.05);
+   }
+   
+   .data-row:last-child {
+       border-bottom: none;
+   }
+   
+   .data-label {
+       color: var(--text-secondary);
+   }
+   
+   .data-value {
+       font-weight: 500;
+   }
+   
+   /* Loader */
+   .loader {
+       display: inline-block;
+       width: 24px;
+       height: 24px;
+       border: 3px solid rgba(255,255,255,0.1);
+       border-radius: 50%;
+       border-top-color: var(--accent-primary);
+       animation: spin 1s ease-in-out infinite;
+   }
+   
+   .loading-container {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       padding: 3rem;
+       gap: 1rem;
+   }
+   
+   /* ==========================================================================
+      Animations
+      ========================================================================== */
+   @keyframes fadeIn {
+       from { opacity: 0; transform: translateY(-10px); }
+       to { opacity: 1; transform: translateY(0); }
+   }
+   
+   @keyframes spin {
+       to { transform: rotate(360deg); }
+   }
+   
+   @keyframes float {
+       0% { transform: translate(0, 0); }
+       100% { transform: translate(30px, 30px); }
+   }

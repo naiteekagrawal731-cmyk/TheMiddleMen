@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:5400/MMDb
+    url: jdbc:mysql://localhost:3306/MMDb
     username: root
     password: ${DB_PASSWORD:password}
   jpa:

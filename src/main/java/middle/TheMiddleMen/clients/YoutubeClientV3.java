@@ -7,6 +7,7 @@ import middle.TheMiddleMen.dtos.youtubeDtos.playListDto.PlayListInfo;
 import middle.TheMiddleMen.dtos.youtubeDtos.playListDto.PlayListIteams;
 import middle.TheMiddleMen.dtos.youtubeDtos.videoDto.VideoData;
 import middle.TheMiddleMen.dtos.youtubeDtos.videoDto.VideosDetails;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -35,6 +36,14 @@ public class YoutubeClientV3 {
                     headers.setBearerAuth(accessToken.getTokenValue());
                 })
                 .retrieve()
+                .onStatus(
+                        HttpStatusCode::is4xxClientError,
+                        response -> response.bodyToMono(String.class)
+                                .flatMap(body -> {
+                                    log.info("ERROR BODY: " + body);
+                                    return Mono.error(new RuntimeException("Groq 4xx Error: " + body));
+                                })
+                )
                 .bodyToMono(AllChannelInfo.class);
     }
     /*
@@ -64,15 +73,21 @@ public class YoutubeClientV3 {
         }
          */
     public Mono<PlayListInfo> getUploadPlayListInfo(OAuth2AccessToken accessToken){
-        log.info("Getting upload playlist info");
         return getAllChannelInfo(accessToken).flatMap(allChannelInfo -> {
-            log.info("Upload playlist id = "+allChannelInfo.getChannels().get(0).getContentDetails().getRelatedPlaylists().getUploads());
              return webClient.get()
                     .uri("/playlistItems?part=snippet,contentDetails&playlistId="+allChannelInfo.getChannels().get(0).getContentDetails().getRelatedPlaylists().getUploads()+"&maxResults=10")
                      .headers(headers -> {
                         headers.setBearerAuth(accessToken.getTokenValue());
                     })
                     .retrieve()
+                     .onStatus(
+                             HttpStatusCode::is4xxClientError,
+                             response -> response.bodyToMono(String.class)
+                                     .flatMap(body -> {
+                                         log.info("ERROR BODY: " + body);
+                                         return Mono.error(new RuntimeException("Groq 4xx Error: " + body));
+                                     })
+                     )
                     .bodyToMono(PlayListInfo.class);
 
         });
@@ -129,6 +144,14 @@ public class YoutubeClientV3 {
                         headers.setBearerAuth(accessToken.getTokenValue());
                     })
                     .retrieve()
+                    .onStatus(
+                            HttpStatusCode::is4xxClientError,
+                            response -> response.bodyToMono(String.class)
+                                    .flatMap(body -> {
+                                        log.info("ERROR BODY: " + body);
+                                        return Mono.error(new RuntimeException("Groq 4xx Error: " + body));
+                                    })
+                    )
                     .bodyToMono(VideosDetails.class)
                     .map(videosDetails -> {
                         //Filtering out ghost videos

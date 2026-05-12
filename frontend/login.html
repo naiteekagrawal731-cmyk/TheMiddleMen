@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TheMiddleMen</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="bg-blob bg-blob-1"></div>
+    <div class="bg-blob bg-blob-2"></div>
+    
+    <div class="auth-wrapper">
+        <div class="glass-card auth-card">
+            <div class="auth-header">
+                <h1 class="text-gradient">TheMiddleMen</h1>
+                <p>Welcome back! Please login to your account.</p>
+            </div>
+            
+            <div id="alertBox" class="alert"></div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="input-field" required placeholder="Enter your username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="input-field" required placeholder="Enter your password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Login</button>
+
+                <div style="text-align: center; margin: 1.5rem 0; color: var(--text-secondary); position: relative;">
+                    <hr style="border: none; border-top: 1px solid var(--glass-border); position: absolute; width: 100%; top: 50%; z-index: 1;">
+                    <span style="background: var(--glass-bg); padding: 0 10px; position: relative; z-index: 2;">OR</span>
+                </div>
+
+                <button type="button" class="btn btn-secondary" onclick="handleGoogleLogin()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.825-.068-1.635-.21-2.415H12.15v4.545h6.51c-.285 1.485-1.125 2.76-2.385 3.585v3.015h3.855c2.265-2.085 3.615-5.175 3.615-8.73z"/>
+                        <path fill="#34A853" d="M12.15 24c3.255 0 6.015-1.08 8.01-2.925l-3.855-3.015c-1.08.735-2.475 1.185-4.155 1.185-3.195 0-5.91-2.16-6.885-5.07l-3.99 3.09C3.33 21.225 7.425 24 12.15 24z"/>
+                        <path fill="#FBBC05" d="M5.265 14.175c-.255-.735-.39-1.53-.39-2.34s.135-1.605.39-2.34v-3.09h-3.99A11.957 11.957 0 000 11.835c0 1.905.45 3.735 1.275 5.43l3.99-3.09z"/>
+                        <path fill="#EA4335" d="M12.15 4.755c1.77 0 3.36.615 4.605 1.8l3.48-3.48C18.15 1.08 15.39 0 12.15 0 7.425 0 3.33 2.775 1.275 6.735l3.99 3.09c.975-2.91 3.69-5.07 6.885-5.07z"/>
+                    </svg>
+                    Continue with Google
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                Don't have an account? <a href="register.html">Register here</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
